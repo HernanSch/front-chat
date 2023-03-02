@@ -8,7 +8,7 @@ const FormularioRegistro = () => {
     const [message, setMessage] = useState('');
   
     const register = () => {
-      axios.post('/api/register', { email: email, password: password })
+      axios.post('http://localhost:8000/usuarios/register', { email: email, password: password })
         .then((response) => {
           setMessage(response.data);
           setEmail('');
@@ -20,7 +20,7 @@ const FormularioRegistro = () => {
     };
   
     const login = () => {
-      axios.post('/api/login', { email: email, password: password })
+      axios.post('http://localhost:8000/usuarios/login', { email: email, password: password })
         .then((response) => {
           localStorage.setItem('token', response.data.token);
           setMessage('Inicio de sesión exitoso');
@@ -39,7 +39,7 @@ const FormularioRegistro = () => {
   
     return (
       <div className="App">
-        <h1>Formulario de Registro</h1>
+        <h1>Chat Máximo Décimo Meridio</h1>
         <form>
           <input
             type="text"
