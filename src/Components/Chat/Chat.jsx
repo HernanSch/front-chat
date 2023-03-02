@@ -1,61 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { useEffect, useState } from 'react'
+import io from 'socket.io-client'
+import moment from 'moment'
 
-const socket = io('http://localhost:8000');
+const socket = io.connect('http://localhost:8000')
 
-function Rooms() {
-  return (
-    <div>
-      <h1>Salas de chat</h1>
-      <RoomSelection />
-    </div>
-  );
-}
-
-function joinRoom(roomId, username) {
-  socket.emit('joinRoom', roomId, username);
-}
-
-function RoomSelection() {
-  return (
-    <div>
-      <button onClick={() => joinRoom('room1', 'John')}>Sala de chat 1</button>
-      <button onClick={() => joinRoom('room2', 'Mary')}>Sala de chat 2</button>
-      <button onClick={() => joinRoom('room3', 'Tom')}>Sala de chat 3</button>
-    </div>
-  );
-}
-
-function ChatRoom({ roomId }) {
-  const [messages, setMessages] = useState([]);
+const Chat = () => {
+  const [room, setRoom] = useState("1")
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([])
 
   useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages((messages) => [...messages, message]);
-    });
-  }, []);
+    // Join the room on mount
+    socket.emit("join_room", room)
 
-  function sendMessage(message) {
-    socket.emit('chatMessage', roomId, message);
+    // Listen for incoming messages
+    socket.on("receive_message", (data) => {
+      const newMessage = {
+        body: data.message,
+        sender: data.sender,
+        timestamp: data.timestamp
+      }
+      setMessages((messages) => [...messages, newMessage])
+    })
+
+    // Clean up event listeners on unmount
+    return () => {
+      socket.off("receive_message")
+    }
+  }, [room])
+
+  const sendMessage = (event) => {
+    event.preventDefault()
+    if (!message.trim()) {
+      return
+    }
+    socket.emit("send_message", {
+      message: message,
+      room: room
+    })
+    const newMessage = {
+      body: message,
+      sender: "me",
+      timestamp: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+    }
+    setMessages((messages) => [...messages, newMessage])
+    setMessage('')
   }
 
-  const [inputText, setInputText] = useState('');
-
   return (
-    <div>
-      <h2>Sala de chat {roomId}</h2>
-      <div style={{ height: '300px', overflowY: 'scroll' }}>
-        {messages.map((message) => (
-          <div key={message.id}>{message.text}</div>
-        ))}
-      </div>
-      <form onSubmit={(e) => { e.preventDefault(); sendMessage(inputText); setInputText(''); }}>
-        <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} />
-        <button type="submit">Enviar</button>
+    <>
+      <ul className='chat-page__messages'>
+        {messages.map((message, index) =>
+          <li className={`chat-page__messages__${message.sender}-li`} key={index}>
+            <p className='chat-page__messages__my-li__message'>
+              {message.body}
+              <span className='chat-page__messages__my-li__timestamp'>
+                {new Date(message.timestamp).toLocaleTimeString()}
+              </span>
+            </p>
+          </li>
+        )}
+      </ul>
+
+      <form className='chat-page__text' onSubmit={sendMessage}>
+        <input
+          className='chat-page__text_input'
+          type='text'
+          placeholder='Escriba su mensaje...'
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+        />
+        <button className='chat-page__text_btn'>Enviar</button>
       </form>
-    </div>
-  );
+    </>
+  )
 }
 
-
-export default Rooms;
+export default Chat
