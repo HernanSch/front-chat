@@ -7,6 +7,9 @@ function Rooms() {
   const [currentRoom, setCurrentRoom] = useState(null);
 
   function joinRoom(roomId, username) {
+    if (currentRoom) {
+      socket.emit('leaveRoom', currentRoom, username);
+    }
     socket.emit('joinRoom', roomId, username);
     setCurrentRoom(roomId);
   }
@@ -34,14 +37,16 @@ function ChatRoom({ roomId }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    socket.emit('joinRoom', roomId);
     socket.on('message', (message) => {
       setMessages((messages) => [...messages, message]);
     });
 
     return () => {
+      socket.emit('leaveRoom', roomId);
       socket.off('message');
     };
-  }, []);
+  }, [roomId]);
 
   function sendMessage(message) {
     socket.emit('chatMessage', roomId, message);
@@ -53,11 +58,17 @@ function ChatRoom({ roomId }) {
     <div>
       <h2>Sala de chat {roomId}</h2>
       <div style={{ height: '300px', overflowY: 'scroll' }}>
-        {messages.map((message) => (
-          <div key={message.id}>{message.text}</div>
+        {messages.map((message, index) => (
+          <div key={index}>{message}</div>
         ))}
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); sendMessage(inputText); setInputText(''); }}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          sendMessage(inputText);
+          setInputText('');
+        }}
+      >
         <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} />
         <button type="submit">Enviar</button>
       </form>
