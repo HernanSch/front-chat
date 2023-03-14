@@ -19,23 +19,7 @@ const FormularioRegistro = () => {
         });
     };
   
-    const login = () => {
-      axios.post('http://localhost:8000/usuarios/login', { email: email, password: password })
-        .then((response) => {
-          localStorage.setItem('token', response.data.token);
-          setMessage('Inicio de sesión exitoso');
-          setEmail('');
-          setPassword('');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-  
-    const logout = () => {
-      localStorage.removeItem('token');
-      setMessage('Sesión cerrada');
-    };
+
   
     return (
       <div className="App">
@@ -56,12 +40,7 @@ const FormularioRegistro = () => {
           <button type="button" onClick={register}>
             Registrarse
           </button>
-          <button type="button" onClick={login}>
-            Iniciar sesión
-          </button>
-          <button type="button" onClick={logout}>
-            Cerrar sesión
-          </button>
+
         </form>
         <p>{message}</p>
       </div>

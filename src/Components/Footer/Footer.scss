@@ -1,0 +1,59 @@
+// Variables
+$primary-color: #2c5282;
+$secondary-color: #718096;
+$bg-color: #edf2f7;
+
+// Estilos para el footer
+footer {
+  background-color: $primary-color;
+  color: $bg-color;
+  font-size: 0.875rem;
+  
+  margin-top: auto;
+
+  a {
+    color: $bg-color;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  hr {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    li {
+      display: inline-block;
+      margin-right: 0.5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  button {
+    color: $primary-color;
+    background-color: $bg-color;
+    transition: all 0.2s ease-in-out;
+    
+
+    &:hover {
+      color: $bg-color;
+      background-color: $secondary-color;
+    }
+  }
+}
+
+
+  
