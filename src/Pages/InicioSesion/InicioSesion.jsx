@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import './InicioSesion.scss'
+import './InicioSesion.scss';
 import { Link } from 'react-router-dom';
+import { saveEmailToCookie } from '../../Utils/CookieUtils'; // importa la función desde el archivo cookieUtils.js
 
 const InicioSesion = () => {
   const [email, setEmail] = useState('');
@@ -17,6 +18,10 @@ const InicioSesion = () => {
         setMessage('Inicio de sesión exitoso');
         setEmail('');
         setPassword('');
+
+        // Guarda el correo electrónico en una cookie
+        saveEmailToCookie(email);
+        console.log(email)
       })
       .catch((error) => {
         console.log(error);
@@ -52,14 +57,13 @@ const InicioSesion = () => {
           </button>
         </form>
         <p className="login-message">{message}</p>
-        <div className='register-box'>
-        <label htmlFor="email">¿Necesitas una cuenta?</label>
-        <Link to="/registro">
-            <button className='register-button'>Registrarse</button>
-        </Link>
+        <div className="register-box">
+          <label htmlFor="email">¿Necesitas una cuenta?</label>
+          <Link to="/registro">
+            <button className="register-button">Registrarse</button>
+          </Link>
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 };

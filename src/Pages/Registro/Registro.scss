@@ -1,0 +1,83 @@
+$discord-color: #7289da;
+$discord-background: #2c2f33;
+$discord-text: #ffffff;
+$discord-muted: #99aab5;
+$discord-accent: #43b581;
+
+.registro {
+    background-color: #FF78B9;
+    color: $discord-text;
+    min-height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .box-register {
+      background-color: #40444B;
+      width: 360px;
+      padding: 20px;
+      border-radius: 5px;
+  
+      h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+  
+        p {
+          margin-top: 20px;
+          margin-bottom: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: $discord-muted;
+        }
+  
+        input {
+          background-color: $discord-muted;
+          color: $discord-text;
+          border: none;
+          border-radius: 5px;
+          padding: 10px;
+          width: 100%;
+          margin-bottom: 20px;
+  
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px $discord-color;
+          }
+        }
+  
+        button {
+          background-color: $discord-accent;
+          color: $discord-text;
+          border: none;
+          border-radius: 5px;
+          padding: 10px;
+          width: 100%;
+          cursor: pointer;
+          transition: background-color 0.2s;
+  
+          &:hover {
+            background-color: lighten($discord-accent, 10%);
+          }
+        }
+  
+        p.message {
+          margin-top: 20px;
+          margin-bottom: 0;
+          color: $discord-muted;
+          font-size: 14px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  

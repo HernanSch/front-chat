@@ -7,6 +7,7 @@ const socket = io('http://localhost:8000');
 function Rooms() {
   const [currentRoom, setCurrentRoom] = useState(null);
   const username = getCookie('username');
+  const email = getCookie('email');
 
   function joinRoom(roomId) {
     if (currentRoom) {
@@ -20,7 +21,7 @@ function Rooms() {
     <div>
       <h1>Salas de chat</h1>
       <RoomSelection joinRoom={joinRoom} />
-      {currentRoom && <ChatRoom roomId={currentRoom} username={username} />}
+      {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} />}
     </div>
   );
 }
@@ -35,7 +36,7 @@ function RoomSelection({ joinRoom }) {
   );
 }
 
-function ChatRoom({ roomId, username }) {
+function ChatRoom({ roomId, username, email }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ function ChatRoom({ roomId, username }) {
   }, [roomId]);
 
   function sendMessage(message) {
-    socket.emit('chatMessage', roomId, `${username}: ${message}`);
+    socket.emit('chatMessage', roomId, `${username} (${email}): ${message}`);
   }
 
   const [inputText, setInputText] = useState('');

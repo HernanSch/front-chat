@@ -1,7 +1,7 @@
 import './App.css';
 // import Chat from './Components/Chat/Chat';
 import Rooms from './Pages/Rooms/Rooms';
-import FormularioRegistro from './Components/FormularioRegistro/FormularioRegistro';
+import Registro from './Pages/Registro/Registro';
 import Home from './Pages/Home/Home'
 // import CreateRoom from './Components/CreateRooom/CreateRoom';
 import Header from './Components/Header/Header';
@@ -23,7 +23,7 @@ function App() {
             <Routes>         
               <Route exact path="/" element={<Home></Home>}></Route>
               <Route exact path="/rooms" element={<Rooms></Rooms>}></Route>
-              <Route exact path="/registro" element={<FormularioRegistro></FormularioRegistro>}></Route>
+              <Route exact path="/registro" element={<Registro></Registro>}></Route>
               <Route exact path="/inicio" element={<InicioSesion></InicioSesion>}></Route>
                            
             </Routes> 
