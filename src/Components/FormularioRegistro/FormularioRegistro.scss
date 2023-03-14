@@ -1,0 +1,61 @@
+$discord-color: #7289da;
+$discord-background: #36393f;
+$discord-text: #b9bbbe;
+$discord-muted: #72767d;
+
+.container {
+    background-color: $discord-background;
+    color: $discord-text;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: $discord-muted;
+  }
+  
+  .button {
+    background-color: $discord-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: lighten($discord-color, 10%);
+    }
+  }
+  
+  .link {
+    color: $discord-color;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .input {
+    background-color: $discord-muted;
+    color: $discord-text;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px $discord-color;
+    }
+  }
+  

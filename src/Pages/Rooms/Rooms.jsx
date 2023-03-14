@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import './Rooms.scss'
 
 const socket = io('http://localhost:8000');
 
 function Rooms() {
   const [currentRoom, setCurrentRoom] = useState(null);
+  const username = getCookie('username');
+  const email = getCookie('email');
 
-  function joinRoom(roomId, username) {
+  function joinRoom(roomId) {
     if (currentRoom) {
       socket.emit('leaveRoom', currentRoom, username);
     }
@@ -18,7 +21,7 @@ function Rooms() {
     <div>
       <h1>Salas de chat</h1>
       <RoomSelection joinRoom={joinRoom} />
-      {currentRoom && <ChatRoom roomId={currentRoom} />}
+      {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} />}
     </div>
   );
 }
@@ -26,14 +29,14 @@ function Rooms() {
 function RoomSelection({ joinRoom }) {
   return (
     <div>
-      <button onClick={() => joinRoom('room1', 'John')}>Sala de chat 1</button>
-      <button onClick={() => joinRoom('room2', 'Mary')}>Sala de chat 2</button>
-      <button onClick={() => joinRoom('room3', 'Tom')}>Sala de chat 3</button>
+      <button onClick={() => joinRoom('room1')}>Sala de chat 1</button>
+      <button onClick={() => joinRoom('room2')}>Sala de chat 2</button>
+      <button onClick={() => joinRoom('room3')}>Sala de chat 3</button>
     </div>
   );
 }
 
-function ChatRoom({ roomId }) {
+function ChatRoom({ roomId, username, email }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -49,7 +52,7 @@ function ChatRoom({ roomId }) {
   }, [roomId]);
 
   function sendMessage(message) {
-    socket.emit('chatMessage', roomId, message);
+    socket.emit('chatMessage', roomId, `${username} (${email}): ${message}`);
   }
 
   const [inputText, setInputText] = useState('');
@@ -57,7 +60,7 @@ function ChatRoom({ roomId }) {
   return (
     <div>
       <h2>Sala de chat {roomId}</h2>
-      <div style={{ height: '300px', overflowY: 'scroll' }}>
+      <div className='chat-messages' style={{ height: '300px', overflowY: 'scroll' }}>
         {messages.map((message, index) => (
           <div key={index}>{message}</div>
         ))}
@@ -74,6 +77,19 @@ function ChatRoom({ roomId }) {
       </form>
     </div>
   );
+}
+
+function getCookie(name) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    const [cookieName, cookieValue] = cookie.split('=');
+    if (cookieName === name) {
+      return cookieValue;
+    }
+  }
+  return null;
 }
 
 export default Rooms;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import './FormularioRegistro.jsx'
 
 const FormularioRegistro = () => {
     const [email, setEmail] = useState('');
@@ -18,9 +19,7 @@ const FormularioRegistro = () => {
           console.log(error);
         });
     };
-  
-
-  
+    
     return (
       <div className="App">
         <h1>Chat Máximo Décimo Meridio</h1>
