@@ -1,6 +1,6 @@
 import './App.css';
 // import Chat from './Components/Chat/Chat';
-import RoomsChat from './Pages/RoomsChat/RoomsChat';
+import Rooms from './Pages/Rooms/Rooms';
 import FormularioRegistro from './Components/FormularioRegistro/FormularioRegistro';
 import Home from './Pages/Home/Home'
 // import CreateRoom from './Components/CreateRooom/CreateRoom';
@@ -22,7 +22,7 @@ function App() {
           <main>
             <Routes>         
               <Route exact path="/" element={<Home></Home>}></Route>
-              <Route exact path="/rooms" element={<RoomsChat></RoomsChat>}></Route>
+              <Route exact path="/rooms" element={<Rooms></Rooms>}></Route>
               <Route exact path="/registro" element={<FormularioRegistro></FormularioRegistro>}></Route>
               <Route exact path="/inicio" element={<InicioSesion></InicioSesion>}></Route>
                            
