@@ -7,6 +7,8 @@ import './Registro.scss'
 const Registro = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [nick, setNick] = useState('');
+    const [photo, setPhoto] = useState('');
     const [message, setMessage] = useState('');
   
     const register = () => {
@@ -14,6 +16,8 @@ const Registro = () => {
         .then((response) => {
           setMessage(response.data);
           setEmail('');
+          setNick('');
+          setPhoto('');
           setPassword('');
         })
         .catch((error) => {
@@ -26,6 +30,20 @@ const Registro = () => {
         <div className='box-register'>
           <h1>Registro de usuarios</h1>
           <form>
+            <p>Nick</p>
+            <input
+              type="text"
+              placeholder="Nick"
+              value={nick}
+              onChange={(e) => setNick(e.target.value)}
+            />
+            <p>Avatar</p>
+            <input
+              type="file"
+              placeholder="Avatar"
+              value={photo}
+              onChange={(e) => setPhoto(e.target.value)}
+            />
             <p>Correo electrónico</p>
             <input
               type="text"
