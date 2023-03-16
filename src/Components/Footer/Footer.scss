@@ -10,7 +10,7 @@ footer {
   font-size: 0.875rem;
   position: fixed;
   bottom: 0;
-  margin-top: auto;
+  
   width: 100%;
   a {
     color: $bg-color;
@@ -55,6 +55,13 @@ footer {
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  footer {
+    position: relative;
+  }
+}
+
 
 
   

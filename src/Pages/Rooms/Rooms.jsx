@@ -20,7 +20,7 @@ function Rooms() {
   }
 
   return (
-    <div>
+    <div className='first-container'>
       <h1>Salas de chat</h1>
       <RoomSelection joinRoom={joinRoom} />
       {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} photo={photo} />}
@@ -55,9 +55,8 @@ function ChatRoom({ roomId, username, email, photo }) {
 
   function sendMessage(message) {
     const userString = username ? ` ${getUserFromCookie('user')}` : '';
-    const emailString = email ? ` ${getEmailFromCookie('email')}` : '';
-    const photoString = photo ? ` ${getPhotoFromCookie('photo')}` : '';
-    socket.emit('chatMessage', roomId,`${userString}${emailString}${photoString}: ${message}`);
+    
+    socket.emit('chatMessage', roomId,`${userString}: ${message}`);
   }
 
   const [inputText, setInputText] = useState('');

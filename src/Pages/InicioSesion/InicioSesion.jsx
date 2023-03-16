@@ -25,7 +25,7 @@ const InicioSesion = () => {
         console.log(res.data.user.photo)
         // Guarda los datos en cookies
         saveEmailToCookie(email);
-        saveUserToCookie(res.data.user);
+        saveUserToCookie(res.data.user.user);
         savePhotoToCookie(res.data.user.photo);
         
       })

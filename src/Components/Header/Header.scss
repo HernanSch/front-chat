@@ -36,3 +36,60 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-icon {
+    display: block;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+  }
+
+  .menu {
+    display: block;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    padding: 10px;
+  }
+
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu li {
+    margin-bottom: 10px;
+  }
+
+  .menu a {
+    display: block;
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  /* Estilos para dispositivos móviles con ancho de pantalla de 600px o menos */
+  .header h1 {
+    font-size: 15px;
+  }
+  .header nav ul li a {
+    font-size: 9px;
+  }
+}
+
+
+
