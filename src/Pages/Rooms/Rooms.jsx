@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import './Rooms.scss'
+import { getUserFromCookie, getEmailFromCookie, getPhotoFromCookie } from '../../Utils/CookieUtils';
 
 const socket = io('http://localhost:8000');
 
 function Rooms() {
   const [currentRoom, setCurrentRoom] = useState(null);
-  const username = getCookie('username');
-  const email = getCookie('email');
+  const username = getUserFromCookie('user');
+  const email = getEmailFromCookie('email');
+  const photo = getPhotoFromCookie('photo');
 
   function joinRoom(roomId) {
     if (currentRoom) {
@@ -21,7 +23,7 @@ function Rooms() {
     <div>
       <h1>Salas de chat</h1>
       <RoomSelection joinRoom={joinRoom} />
-      {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} />}
+      {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} photo={photo} />}
     </div>
   );
 }
@@ -36,7 +38,7 @@ function RoomSelection({ joinRoom }) {
   );
 }
 
-function ChatRoom({ roomId, username, email }) {
+function ChatRoom({ roomId, username, email, photo }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -52,7 +54,10 @@ function ChatRoom({ roomId, username, email }) {
   }, [roomId]);
 
   function sendMessage(message) {
-    socket.emit('chatMessage', roomId, `${username} (${email}): ${message}`);
+    const userString = username ? ` ${getUserFromCookie('user')}` : '';
+    const emailString = email ? ` ${getEmailFromCookie('email')}` : '';
+    const photoString = photo ? ` ${getPhotoFromCookie('photo')}` : '';
+    socket.emit('chatMessage', roomId,`${userString}${emailString}${photoString}: ${message}`);
   }
 
   const [inputText, setInputText] = useState('');
@@ -72,24 +77,15 @@ function ChatRoom({ roomId, username, email }) {
           setInputText('');
         }}
       >
+        <div className='user-info'>
+          {photo && <img className='profile-pic' src={photo} alt='profile pic' />}
+          {username && <div className='username'>{username}</div>}
+        </div>
         <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} />
         <button type="submit">Enviar</button>
       </form>
     </div>
   );
-}
-
-function getCookie(name) {
-  const cookieString = document.cookie;
-  const cookies = cookieString.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    const [cookieName, cookieValue] = cookie.split('=');
-    if (cookieName === name) {
-      return cookieValue;
-    }
-  }
-  return null;
 }
 
 export default Rooms;

@@ -3,7 +3,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import './InicioSesion.scss';
 import { Link } from 'react-router-dom';
-import { saveEmailToCookie } from '../../Utils/CookieUtils'; // importa la función desde el archivo cookieUtils.js
+import { saveEmailToCookie } from '../../Utils/CookieUtils'; 
+import { saveUserToCookie } from '../../Utils/CookieUtils'; 
+import { savePhotoToCookie } from '../../Utils/CookieUtils'; 
 
 const InicioSesion = () => {
   const [email, setEmail] = useState('');
@@ -13,20 +15,25 @@ const InicioSesion = () => {
   const login = () => {
     axios
       .post('http://localhost:8000/usuarios/login', { email: email, password: password })
-      .then((response) => {
-        localStorage.setItem('token', response.data.token);
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
         setMessage('Inicio de sesión exitoso');
         setEmail('');
         setPassword('');
-
-        // Guarda el correo electrónico en una cookie
+        
+        console.log(res.data)
+        console.log(res.data.user.photo)
+        // Guarda los datos en cookies
         saveEmailToCookie(email);
-        console.log(email)
+        saveUserToCookie(res.data.user);
+        savePhotoToCookie(res.data.user.photo);
+        
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
 
   const logout = () => {
     localStorage.removeItem('token');

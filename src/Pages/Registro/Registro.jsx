@@ -7,16 +7,16 @@ import './Registro.scss'
 const Registro = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [nick, setNick] = useState('');
+    const [user, setUser] = useState('');
     const [photo, setPhoto] = useState('');
     const [message, setMessage] = useState('');
   
     const register = () => {
-      axios.post('http://localhost:8000/usuarios/register', { email: email, password: password })
+      axios.post('http://localhost:8000/usuarios/register', { user:user, photo:photo, email: email, password: password })
         .then((response) => {
           setMessage(response.data);
           setEmail('');
-          setNick('');
+          setUser('');
           setPhoto('');
           setPassword('');
         })
@@ -34,12 +34,12 @@ const Registro = () => {
             <input
               type="text"
               placeholder="Nick"
-              value={nick}
-              onChange={(e) => setNick(e.target.value)}
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
             />
             <p>Avatar</p>
             <input
-              type="file"
+              type="text"
               placeholder="Avatar"
               value={photo}
               onChange={(e) => setPhoto(e.target.value)}
