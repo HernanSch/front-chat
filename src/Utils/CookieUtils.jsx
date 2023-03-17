@@ -23,3 +23,15 @@ export function savePhotoToCookie(photo) {
 export function getPhotoFromCookie() {
   return Cookies.get('photo');
 }
+
+export function removeTokenCookie() {
+  Cookies.remove("token");
+}
+
+export function saveTokenCookie(token) {
+  Cookies.set('token', token, { expires: 30 });
+}
+
+export function getTokenFromCookie() {
+  return Cookies.get('token');
+}

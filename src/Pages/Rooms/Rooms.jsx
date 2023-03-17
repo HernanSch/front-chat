@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import './Rooms.scss'
 import { getUserFromCookie, getEmailFromCookie, getPhotoFromCookie } from '../../Utils/CookieUtils';
+import LogoutButton from '../../Components/LogoutButton/LogoutButton';
+import PanelUsers from '../../Components/PanelUsers/PanelUsers';
 
 const socket = io('http://localhost:8000');
 
@@ -20,10 +22,21 @@ function Rooms() {
   }
 
   return (
-    <div className='first-container'>
-      <h1>Salas de chat</h1>
-      <RoomSelection joinRoom={joinRoom} />
-      {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} photo={photo} />}
+    <div >
+      {/* <div>
+        <PanelUsers></PanelUsers>
+      </div> */}
+      <div >
+        <LogoutButton></LogoutButton>
+      </div>
+      <div className='first-container'>      
+        <div>        
+          <h1>Salas de chat</h1>
+          <RoomSelection joinRoom={joinRoom} />
+          {currentRoom && <ChatRoom roomId={currentRoom} username={username} email={email} photo={photo} />}
+        </div>
+        
+      </div>
     </div>
   );
 }
@@ -31,9 +44,9 @@ function Rooms() {
 function RoomSelection({ joinRoom }) {
   return (
     <div>
-      <button onClick={() => joinRoom('room1')}>Sala de chat 1</button>
-      <button onClick={() => joinRoom('room2')}>Sala de chat 2</button>
-      <button onClick={() => joinRoom('room3')}>Sala de chat 3</button>
+      <button className='rooms-button' onClick={() => joinRoom('room1')}>Sala de chat 1</button>
+      <button className='rooms-button' onClick={() => joinRoom('room2')}>Sala de chat 2</button>
+      <button className='rooms-button' onClick={() => joinRoom('room3')}>Sala de chat 3</button>
     </div>
   );
 }
@@ -83,6 +96,7 @@ function ChatRoom({ roomId, username, email, photo }) {
         <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} />
         <button type="submit">Enviar</button>
       </form>
+      
     </div>
   );
 }

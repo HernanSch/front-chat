@@ -27,9 +27,11 @@ const InicioSesion = () => {
         saveEmailToCookie(email);
         saveUserToCookie(res.data.user.user);
         savePhotoToCookie(res.data.user.photo);
-        
+        document.cookie = `token=${res.data.token}; path=/; secure; SameSite=strict`;
+
       })
       .catch((error) => {
+        setMessage('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
         console.log(error);
       });
   };
@@ -37,7 +39,10 @@ const InicioSesion = () => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    
     setMessage('Sesión cerrada');
+    // redirigir a la página de inicio de sesión
+    window.location.href = 'http://localhost:3000/inicio';
   };
 
   return (
