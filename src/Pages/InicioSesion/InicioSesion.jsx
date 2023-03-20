@@ -1,49 +1,65 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './InicioSesion.scss';
 import { Link } from 'react-router-dom';
-import { saveEmailToCookie } from '../../Utils/CookieUtils'; 
-import { saveUserToCookie } from '../../Utils/CookieUtils'; 
-import { savePhotoToCookie } from '../../Utils/CookieUtils'; 
+import { saveEmailToCookie, saveUserToCookie, savePhotoToCookie, getIDFromCookie  } from '../../Utils/CookieUtils'; 
 
 const InicioSesion = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
-  const login = () => {
-    axios
-      .post('http://localhost:8000/usuarios/login', { email: email, password: password })
-      .then((res) => {
-        localStorage.setItem('token', res.data.token);
-        setMessage('Inicio de sesión exitoso');
-        setEmail('');
-        setPassword('');
-        
-        console.log(res.data)
-        console.log(res.data.user.photo)
-        // Guarda los datos en cookies
-        saveEmailToCookie(email);
-        saveUserToCookie(res.data.user.user);
-        savePhotoToCookie(res.data.user.photo);
-        document.cookie = `token=${res.data.token}; path=/; secure; SameSite=strict`;
-
-      })
-      .catch((error) => {
-        setMessage('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
-        console.log(error);
+  const login = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/usuarios/login', {
+        email: email,
+        password: password,
       });
+
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      setMessage('Inicio de sesión exitoso');
+      setEmail('');
+      setPassword('');
+
+      // Actualiza el estado de conexión del usuario en la base de datos
+      await axios.put(`http://localhost:8000/usuarios/updateusers/${user._id}`, {
+        connected: true,
+      });
+
+      // Guarda los datos en cookies
+      saveEmailToCookie(email);
+      saveUserToCookie(user.user);
+      savePhotoToCookie(user.photo);
+      document.cookie = `token=${token}; path=/; secure; SameSite=strict`;
+    } catch (error) {
+      setMessage('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
+      console.log(error);
+    }
   };
 
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    
-    setMessage('Sesión cerrada');
-    // redirigir a la página de inicio de sesión
-    window.location.href = 'http://localhost:3000/inicio';
+  // Cierra sesion y modifica el valor de connected a False pero genera un error en la consola
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const user_id = getIDFromCookie(); // use getIDFromCookie here
+
+      const response = await axios.put(`http://localhost:8000/usuarios/updateusers/${user_id}`, {
+        connected: false,
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // ...
+    } catch (error) {
+      console.error('Error al cerrar sesión: ', error);
+    }
   };
+  
 
   return (
     <div className="login-container">
@@ -64,7 +80,7 @@ const InicioSesion = () => {
           <button className="login-button" type="button" onClick={login}>
             Iniciar sesión
           </button>
-          <button className="login-button" type="button" onClick={logout}>
+          <button className="login-button" type="button" onClick={handleLogout}>
             Cerrar sesión
           </button>
         </form>

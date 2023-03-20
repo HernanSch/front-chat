@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import './Rooms.scss'
 import { getUserFromCookie, getEmailFromCookie, getPhotoFromCookie } from '../../Utils/CookieUtils';
 import LogoutButton from '../../Components/LogoutButton/LogoutButton';
-import PanelUsers from '../../Components/PanelUsers/PanelUsers';
+import UsersConnected from '../../Components/UsersConnected/UsersConnected';
 
 const socket = io('http://localhost:8000');
 
@@ -23,9 +23,9 @@ function Rooms() {
 
   return (
     <div >
-      {/* <div>
-        <PanelUsers></PanelUsers>
-      </div> */}
+      <div>
+        <UsersConnected></UsersConnected>
+      </div>
       <div >
         <LogoutButton></LogoutButton>
       </div>

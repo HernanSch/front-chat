@@ -1,21 +1,32 @@
 import React from 'react';
-import './LogoutButton.scss'
 
-const LogoutButton = () => {
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    // Aquí podrías agregar alguna otra lógica de cierre de sesión, como redirigir a la página de inicio de sesión.
-    window.location.href = 'http://localhost:3000/inicio';
+class LogoutButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
 
-  return (
-    <div className="logout-button-container">
-      <button onClick={handleLogout} className="logout-button">Cerrar sesión</button>
-    </div>
-  );
+  handleLogoutClick() {
+    fetch('http://localhost:8000/usuarios/logout', {
+      method: 'POST',
+      credentials: 'include',
+    })
+    .then(response => {
+      if (response.ok) {
+        this.props.onLogout();
+      }
+    });
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleLogoutClick}>Logout</button>
+    );
+  }
 }
 
 export default LogoutButton;
+
 
 
 

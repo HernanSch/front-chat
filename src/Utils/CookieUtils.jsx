@@ -35,3 +35,11 @@ export function saveTokenCookie(token) {
 export function getTokenFromCookie() {
   return Cookies.get('token');
 }
+
+export function saveIdToCookie(_id) {
+  Cookies.set('_id', _id, { expires: 30 });
+}
+
+export function getIDFromCookie() {
+  return Cookies.get('_id');
+}
