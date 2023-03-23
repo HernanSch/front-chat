@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import './Registro.scss'
-
+import API_URL from '../../Utils/Api';
 
 const Registro = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Registro = () => {
     const [message, setMessage] = useState('');
   
     const register = () => {
-      axios.post('http://localhost:8000/usuarios/register', { user:user, photo:photo, email: email, password: password })
+      axios.post(`${API_URL}/usuarios/register`, { user:user, photo:photo, email: email, password: password })
         .then((response) => {
           setMessage(response.data);
           setEmail('');

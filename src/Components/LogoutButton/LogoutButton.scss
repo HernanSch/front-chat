@@ -1,27 +1,14 @@
-.logout-button-container {
-    position: absolute;
-    
-    right: 0;
-    padding: 10px;
-  }
-  
-  .logout-button{
-    background-color: #e6620a;
-    color: #FFFFFF;
-    border: none;
-   
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-  
-    /* Ajustar el tamaño del botón */
-    font-size: 0,5em;
-    height: 30px;
-    width: 120px;
-  }
-  
-  
-  .logout-button-container{
-    background-color: #424449;
-    padding-right: 1%;
-  }
+.logout-button {
+  background-color: #ab0000;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: #677BC4;
+}

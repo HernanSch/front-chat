@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 import './Rooms.scss'
 import { getUserFromCookie, getEmailFromCookie, getPhotoFromCookie } from '../../Utils/CookieUtils';
 import LogoutButton from '../../Components/LogoutButton/LogoutButton';
-import PanelUsers from '../../Components/PanelUsers/PanelUsers';
-
-const socket = io('http://localhost:8000');
+import UsersConnected from '../../Components/UsersConnected/UsersConnected';
+import socket from '../../Utils/Socket'
 
 function Rooms() {
   const [currentRoom, setCurrentRoom] = useState(null);
@@ -23,10 +21,10 @@ function Rooms() {
 
   return (
     <div >
-      {/* <div>
-        <PanelUsers></PanelUsers>
-      </div> */}
-      <div >
+      <div className='users-connected-container'>
+        <UsersConnected></UsersConnected>
+      </div>
+      <div className='btn-logout-container'>
         <LogoutButton></LogoutButton>
       </div>
       <div className='first-container'>      
