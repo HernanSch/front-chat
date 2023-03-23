@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './InicioSesion.scss';
 import { Link } from 'react-router-dom';
-import { saveEmailToCookie, saveUserToCookie, savePhotoToCookie, getIDFromCookie  } from '../../Utils/CookieUtils'; 
+import { saveEmailToCookie, saveUserToCookie, savePhotoToCookie, saveUserIdToCookie } from '../../Utils/CookieUtils'; 
+import API_URL from '../../Utils/Api';
 
 const InicioSesion = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  const save = (user) => {
+    saveEmailToCookie(user.email);
+    saveUserToCookie(user.user);
+    savePhotoToCookie(user.photo);
+    saveUserIdToCookie(user._id);
+  }
+
   const login = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/usuarios/login', {
+      const response = await axios.post(`${API_URL}/usuarios/login`, {
         email: email,
         password: password,
       });
@@ -23,14 +31,12 @@ const InicioSesion = () => {
       setPassword('');
 
       // Actualiza el estado de conexión del usuario en la base de datos
-      await axios.put(`http://localhost:8000/usuarios/updateusers/${user._id}`, {
+      await axios.put(`${API_URL}/usuarios/updateusers/${user._id}`, {
         connected: true,
       });
 
       // Guarda los datos en cookies
-      saveEmailToCookie(email);
-      saveUserToCookie(user.user);
-      savePhotoToCookie(user.photo);
+      save(user);
       document.cookie = `token=${token}; path=/; secure; SameSite=strict`;
     } catch (error) {
       setMessage('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
@@ -38,26 +44,15 @@ const InicioSesion = () => {
     }
   };
 
-
-  // Cierra sesion y modifica el valor de connected a False pero genera un error en la consola
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const user_id = getIDFromCookie(); // use getIDFromCookie here
-
-      const response = await axios.put(`http://localhost:8000/usuarios/updateusers/${user_id}`, {
-        connected: false,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const handleLogout = () => {
+    axios.post(`${API_URL}/usuarios/logout`)
+      .then(response => {
+        setIsLoggedOut(true);
+      })
+      .catch(error => {
+        console.log(error);
       });
-
-      // ...
-    } catch (error) {
-      console.error('Error al cerrar sesión: ', error);
-    }
   };
   
 

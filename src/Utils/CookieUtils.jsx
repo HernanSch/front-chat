@@ -36,10 +36,10 @@ export function getTokenFromCookie() {
   return Cookies.get('token');
 }
 
-export function saveIdToCookie(_id) {
-  Cookies.set('_id', _id, { expires: 30 });
+export function saveUserIdToCookie(userId) {
+  Cookies.set('userId', userId, { expires: 30 });
 }
 
-export function getIDFromCookie() {
-  return Cookies.get('_id');
+export function getUserIdFromCookie() {
+  return Cookies.get('userId');
 }

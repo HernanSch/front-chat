@@ -1,0 +1,21 @@
+.connected_container {
+    margin-left: 10px; 
+    background-color: #afb0b1;
+    height: 305px;
+    width: 100%;
+  }
+
+.green-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+    margin-right: 10px; /* Ajusta la separación entre la bola y el nombre del usuario */
+  }
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }

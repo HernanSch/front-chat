@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import io from 'socket.io-client'
+import socket from './socket';
 import moment from 'moment'
-
-const socket = io.connect('http://localhost:8000')
 
 const Chat = () => {
   const [room, setRoom] = useState("1")
@@ -26,6 +24,7 @@ const Chat = () => {
     // Clean up event listeners on unmount
     return () => {
       socket.off("receive_message")
+      disconnectFromRoom()
     }
   }, [room])
 
@@ -46,6 +45,17 @@ const Chat = () => {
     setMessages((messages) => [...messages, newMessage])
     setMessage('')
   }
+
+  const disconnectFromRoom = () => {
+    socket.leave(room)
+  }
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", disconnectFromRoom)
+    return () => {
+      window.removeEventListener("beforeunload", disconnectFromRoom)
+    }
+  }, [])
 
   return (
     <>

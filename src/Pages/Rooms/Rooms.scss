@@ -81,3 +81,17 @@ input[type="text"] {
   color: #FFFFFF;
 }
 
+.users-connected-container {
+  position: fixed;
+  left: 0;
+  top: 35%; /* opcional, para centrar verticalmente */
+  transform: translateY(-50%); /* opcional, para centrar verticalmente */
+}
+
+/* Estilos para el contenedor de botón de logout */
+.btn-logout-container {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  margin: 10px;
+}
