@@ -19,7 +19,7 @@ const InicioSesion = () => {
 
   const login = async () => {
     try {
-      const response = await axios.post(`${API_URL}/usuarios/login`, {
+      const response = await axios.post(`https://back-chat-one.vercel.app/usuarios/login`, {
         email: email,
         password: password,
       });
