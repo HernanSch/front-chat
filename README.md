@@ -7,7 +7,7 @@ This is my personal project with React, a interactive chat website.✨
 This is a sample project to demonstrate how to build a basic web application using React JavaScript.
 The application allows you to register, log in and interact with the chat with other users.
 
-## Hpw to install
+## How to install
 
 To install the project, follow these steps:
 
@@ -19,8 +19,9 @@ BACK --> https://github.com/HernanSch/back-chat.git
 
      Access the project folder via the command line:
 
-cd front chat
-cd backchat
+cd front-chat
+
+cd back-chat
 
      Install the dependencies using npm:
 
