@@ -1,6 +1,6 @@
 # Discord Fake Website - React JS / Node JS / MongoDB
 
-This is my personal project with React, Node and MongoDB, a interactive chat website.✨
+This is my personal project with React, Node and MongoDB, an interactive chat website.✨
 
 ## Description
 
