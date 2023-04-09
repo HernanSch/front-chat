@@ -14,6 +14,7 @@ To install the project, follow these steps:
      Clone this repository to your local machine using the following command:
 
 FRONT --> https://github.com/HernanSch/front-chat.git
+
 BACK --> https://github.com/HernanSch/back-chat.git
 
      Access the project folder via the command line:
@@ -24,6 +25,29 @@ cd backchat
      Install the dependencies using npm:
 
 npm install
+
+## Contribution
+
+If you want to contribute to the project, follow these steps:
+
+     Fork the repository.
+
+     Clone the fork to your local machine.
+
+     Create a new branch to work on:
+
+git checkout -b my-new-branch
+
+     Make your changes and save your files.
+
+     Make a commit and commit your changes to your fork:
+
+git add .
+git commit -m "my commit message"
+git push origin my-new-branch
+
+     Open a pull request in the original repository so we can review your changes.
+     
 
 ## Made with 🛠️
  
