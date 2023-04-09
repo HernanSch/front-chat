@@ -20,4 +20,4 @@ This is my personal project with React, a interactive chat website.✨
 
 
 ---
-⌨️ with ❤️ by [HernanSchiavonRaineri](https://github.com/HernanSch) 😊
+[HernanSchiavonRaineri](https://github.com/HernanSch) 😊
