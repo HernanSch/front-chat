@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const socket = io("https://back-chat-one.vercel.app:9000/", {
+const socket = io("http://localhost:9000", {
   reconnection: false // Desactiva la reconexión automática
 });
 

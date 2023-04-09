@@ -5,6 +5,7 @@ import API_URL from '../../Utils/Api';
 
 const UsersConnected = () => {
   const [usuarios, setUsuarios] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const obtenerUsuariosConectados = async () => {
@@ -19,22 +20,24 @@ const UsersConnected = () => {
   }, []);
 
   return (
-    <div className='connected_container'>
-      <h2>Conectados</h2>
-      <ul>
-        {usuarios.length > 0 ? (
-          usuarios.map((usuario) => (
-            <li key={usuario._id}>
-              <span className="green-dot"></span> {/* Añade una bola verde */}
-              {usuario.user} 
-            </li>
-          ))
-        ) : (
-          <li>No hay usuarios conectados</li>
-        )}
-      </ul>
+    <div className='connected-container'>
+     
+      {showModal && (
+        <div className='modal'>
+          <h3>Usuarios conectados:</h3>
+          <ul>
+            {usuarios.map((usuario) => (
+              <li key={usuario._id}>
+                <span className="green-dot"></span>
+                {usuario.user} 
+              </li>
+            ))}
+          </ul>
+          <button onClick={() => setShowModal(false)}>Cerrar</button>
+        </div>
+      )}
+      <button onClick={() => setShowModal(true)}>Conectados</button>
     </div>
-
   );
 };
 

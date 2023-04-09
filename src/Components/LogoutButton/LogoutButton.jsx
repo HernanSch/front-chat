@@ -29,9 +29,7 @@ function LogoutButton() {
         console.log(error);
       });
   };
-  
-  
-  
+    
   return (
     <div>
       {isLoggedOut ? (
