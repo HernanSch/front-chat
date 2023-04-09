@@ -47,7 +47,7 @@ Make a commit and commit your changes to your fork:
      git commit -m "my commit message"
      git push origin my-new-branch
 
-Open a pull request in the original repository so we can review your changes.
+Open a pull request in the original repository so I can review your changes.
      
 
 ## Made with 🛠️
