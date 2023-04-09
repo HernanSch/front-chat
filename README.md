@@ -9,7 +9,7 @@ This is my personal project with React, a interactive chat website.✨
 
 ## Made by ✒️
 
-* *Hernán Schiavon Raineri ** - You can find me here:
+* **Hernán Schiavon Raineri** - You can find me here:
 * [Github](https://github.com/HernanSch)
 * [Linkedin](https://www.linkedin.com/in/hernan-schiavon-raineri/) 
 
