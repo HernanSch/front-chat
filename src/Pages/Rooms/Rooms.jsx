@@ -77,7 +77,7 @@ function ChatRoom({ roomId, username, email, photo }) {
       <h2>Sala de chat {roomId}</h2>
       <div className='chat-messages' style={{ height: '300px', overflowY: 'scroll' }}>
         {messages.map((message, index) => (
-          <div key={index}>{message}</div>
+          <div className='input-text' key={index}>{message}</div>
         ))}
       </div>
       <form
