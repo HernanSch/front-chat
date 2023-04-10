@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Discord Fake Website - React JS / Node JS / MongoDB
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my personal project with React, Node and MongoDB, an interactive chat website.✨
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This is a sample project to demonstrate how to build a basic web application using React JavaScript.
+The application allows you to register, log in and interact with the chat with other users.
 
-### `npm start`
+## How to install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To install the project, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone this repository to your local machine using the following command:
 
-### `npm test`
+     FRONT --> https://github.com/HernanSch/front-chat.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+     BACK --> https://github.com/HernanSch/back-chat.git
 
-### `npm run build`
+Access the project folder via the command line:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+     cd front-chat
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+     cd back-chat
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install the dependencies using npm:
 
-### `npm run eject`
+     npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Contribution
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you want to contribute to the project, follow these steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Fork the repository.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Clone the fork to your local machine.
 
-## Learn More
+Create a new branch to work on:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+     git checkout -b my-new-branch
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Make your changes and save your files.
 
-### Code Splitting
+Make a commit and commit your changes to your fork:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+     git add .
+     git commit -m "my commit message"
+     git push origin my-new-branch
 
-### Analyzing the Bundle Size
+Open a pull request in the original repository so I can review your changes.
+     
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Made with 🛠️
+ 
+<a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://www.javascript.com/" target="_blank" rel="noreferrer"> <img src="https://i.imgur.com/84IfG7c.png" alt="JS" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://sass-lang.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://w7.pngwing.com/pngs/956/695/png-transparent-mongodb-original-wordmark-logo-icon-thumbnail.png" alt="MongoDB" width="40" height="40"/></a>
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Made by ✒️
 
-### Advanced Configuration
+* **Hernán Schiavon Raineri** - You can find me here:
+* [Github](https://github.com/HernanSch)
+* [Linkedin](https://www.linkedin.com/in/hernan-schiavon-raineri/) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+---
+[Hernan Schiavon Raineri](https://github.com/HernanSch) 😊
